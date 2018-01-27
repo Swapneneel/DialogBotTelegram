@@ -4,7 +4,7 @@
   "description": "This is for testing purpose only",
   "main": "services.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node services.js"
   },
   "repository": {
     "type": "git",
@@ -16,10 +16,8 @@
   "author": "Neel",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
     "telegraf": "^3.17.5"
-  },
-
-  "scripts": {
-    "start": "node services.js"
   }
 }
