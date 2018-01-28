@@ -3,7 +3,7 @@
 //This code will echo the message sent.
 
 //****************Testing for the server is working or not***********************
-
+/*
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -20,7 +20,7 @@ const server = app.listen(process.env.PORT || 5000, () => {
   console.log('Express server listening on port %d in %s mode', server.address().port, app.settings.env);
 });
 
-/* For Facebook Validation */
+// For Facebook Validation
 app.get('/', function (req, res) {
   res.send("Hello there! I'm working my best.")
 });
@@ -33,7 +33,7 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-/* Handling all messenges */
+// Handling all messenges
 app.post('/webhook', (req, res) => {
   console.log(req.body);
   if (req.body.object === 'page') {
@@ -48,6 +48,10 @@ app.post('/webhook', (req, res) => {
     //res.status(200).end();
   }
 });
+
+//Well working on openShift at port 5000
+
+*/
 
 
 
@@ -74,3 +78,43 @@ bot.startPolling()
 
 
 */
+
+
+class Bot{
+  init(TOKEN){
+    return new Promise((resolve,reject) => {
+      let url = 'https://api.telegram.org/bot${542765055:AAEFvHayQkdyYoTWii2Uv3DC4FmR2m-phu4}/getMe'
+      request(url, (error, r, body) => {
+        const response = JSON.parse(body).result
+        if(error) return
+        if(!response) return
+        this.id = response.id || ''
+        this.first_name = response.first_name || ''
+        this.last_name = response.last_name || ''
+        this.username = response.username || ''
+        this.language_code = response.language_code || ''
+        resolve()
+      })
+    })
+  }
+
+  getName(){
+    if (this.last_name) {
+      return '$(this.first_name) $(this.last_name)'
+    } else {
+      return '$(this.first_name)'
+    }
+  }
+
+  introduceYourself(){
+    console.log('Hello my name is ${this.getName()}. You can speak to me through my username : @${this.username}');
+  }
+}
+
+class token{
+  TOKEN = 'tuxedo_cat'
+  const b = new Bot()
+  b.init(TOKEN).then(() =>{
+     b.introduceYourself()
+  })
+}
