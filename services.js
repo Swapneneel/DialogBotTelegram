@@ -83,7 +83,7 @@ bot.startPolling()
 class Bot{
   init(TOKEN){
     return new Promise((resolve,reject) => {
-      let url = 'https://api.telegram.org/bot${542765055:AAEFvHayQkdyYoTWii2Uv3DC4FmR2m-phu4}/getMe'
+      let url = 'https://api.telegram.org/bot${TOKEN}/getMe'
       request(url, (error, r, body) => {
         const response = JSON.parse(body).result
         if(error) return
